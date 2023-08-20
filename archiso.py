@@ -59,8 +59,8 @@ def install_system_and_tools():
     run_command("genfstab -pU /mnt >> /mnt/etc/fstab")
 
 
-def arch_system():
-    run_command("arch-chroot /mnt")
+# def arch_system():
+    # run_command("arch-chroot /mnt")
 
 
 # Виклик функції для встановлення Arch Linux
@@ -68,4 +68,4 @@ other()
 hello()
 disk()
 install_system_and_tools()
-arch_system()
+# arch_system()
