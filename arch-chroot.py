@@ -89,3 +89,14 @@ def install_pkg():
     run_command("pacman -S --noconfirm pulseaudio pulseaudio-alsa pulseaudio-jack pavucontrol")
     run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty firefox qbittorrent ntp")
     run_command("pacman -Rscn --noconfirm $(pacman -Qtdq --noconfirm)")
+
+arch_system()
+grub()
+user()
+root_password()
+user_password()
+add_user_root()
+list()
+aur()
+install_pkg()
+
