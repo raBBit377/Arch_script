@@ -15,7 +15,7 @@ f"""
 ██   ██ ██   ██ ██      ██   ██     ██      ██ ██  ██ ██ ██    ██  ██ ██      ██ ██  ██ ██      ██    ██    ██   ██ ██      ██      
 ██   ██ ██   ██  ██████ ██   ██     ███████ ██ ██   ████  ██████  ██   ██     ██ ██   ████ ███████    ██    ██   ██ ███████ ███████
 
-""" + colors.reset + start_animation_thread())
+""" + colors.reset )
 
 
 
@@ -41,6 +41,7 @@ def start_animation_thread():
     animation_thread = threading.Thread(target=loading_animation)
     animation_thread.start()
 
+start_animation_thread()
 def run_command(command):
     print(colors.fg.green + "Running command: " + colors.reset, command)
     log_command(f"Running command: {command}")
