@@ -20,7 +20,7 @@ f"""
 log_file = "command_logs.txt"
 
 def run_command(command):
-    print(colors.fg.green + "Running command: " + colors.reset, command)
+    print(colors.fg.orange + "Running command: " + colors.reset, command)
     log_command(f"Running command: {command}")
 
     try:
@@ -40,7 +40,7 @@ def run_command(command):
         process.wait()
 
         if process.returncode == 0:  # Перевіряємо успішне завершення команди
-            sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.green_li + "[OK]\n" + colors.reset)
+            sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.green + "[OK]\n" + colors.reset)
             sys.stdout.flush()
         else:
             sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.red + "[ERROR]\n" + colors.reset)
