@@ -1,7 +1,5 @@
 import subprocess
 from color import colors
-import time
-import threading
 import sys
 
 def clear():
@@ -21,27 +19,6 @@ f"""
 
 log_file = "command_logs.txt"
 
-
-animation_event = threading.Event()  # Створюємо об'єкт сигналізації
-
-def loading_animation():
-    animation = [colors.fg.cyan + "[#    ]", "[##   ]", "[###  ]", "[#### ]", "[#####]"+ colors.reset]
-    i = 0
-    while not animation_event.is_set():
-        sys.stdout.write("\r" + animation[i])
-        sys.stdout.flush()
-        i = (i + 1) % len(animation)
-        time.sleep(0.5)
-    sys.stdout.write("\r" + " " * 30 + "\r")
-    sys.stdout.flush()
-
-# Функція для запуску анімації в окремому потоці
-def start_animation_thread():
-    global animation_thread
-    animation_thread = threading.Thread(target=loading_animation)
-    animation_thread.start()
-
-start_animation_thread()
 def run_command(command):
     print(colors.fg.green + "Running command: " + colors.reset, command)
     log_command(f"Running command: {command}")
