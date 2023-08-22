@@ -4,22 +4,25 @@ import time
 import threading
 import sys
 
+
 def clear():
     run_command("clear")
+
+
 def hello():
     print(colors.fg.cyan +
-f"""
+          f"""
  █████  ██████   ██████ ██   ██     ██      ██ ███    ██ ██    ██ ██   ██     ██ ███    ██ ███████ ████████  █████  ██      ██      
 ██   ██ ██   ██ ██      ██   ██     ██      ██ ████   ██ ██    ██  ██ ██      ██ ████   ██ ██         ██    ██   ██ ██      ██      
 ███████ ██████  ██      ███████     ██      ██ ██ ██  ██ ██    ██   ███       ██ ██ ██  ██ ███████    ██    ███████ ██      ██      
 ██   ██ ██   ██ ██      ██   ██     ██      ██ ██  ██ ██ ██    ██  ██ ██      ██ ██  ██ ██      ██    ██    ██   ██ ██      ██      
 ██   ██ ██   ██  ██████ ██   ██     ███████ ██ ██   ████  ██████  ██   ██     ██ ██   ████ ███████    ██    ██   ██ ███████ ███████
 
-""" + colors.reset )
-
+""" + colors.reset)
 
 
 log_file = "command_logs.txt"
+
 
 def run_command(command):
     print(colors.fg.yellow + "Running command: " + colors.reset, command)
@@ -56,6 +59,7 @@ def run_command(command):
         log_command(str(e))
         exit(1)
 
+
 def log_command(log_message):
     # Запис інформації у файл логів
     with open(log_file, "a") as f:
@@ -73,6 +77,7 @@ def modify_lines_in_file(filename, lines_to_modify):
                 if target_line in line:
                     modified_line = line.replace(target_line, replacement).lstrip("#")
             f.write(modified_line)
+
 
 def arch_system():
     run_command("echo 'User-PC' >> /etc/hostname")
@@ -138,7 +143,6 @@ def mirrorlist():
     run_command("reflector --verbose --country 'Ukraine,Germany' --sort rate --save /etc/pacman.d/mirrorlist")
 
 
-
 def install_pkg():
     run_command("pacman -Syy")
     run_command("pacman -Syy")
@@ -168,6 +172,13 @@ def sysctl():
     run_command("systemctl enable NetworkManager")
     # run_command("systemctl enable sddm")
 
+
+def lost():
+    print(colors.fg.green + "Установка завершена. Натисніть Enter, щоб закрити скрипт." + colors.reset)
+    input()
+    sys.exit()
+
+
 clear()
 arch_system()
 grub()
@@ -178,3 +189,4 @@ add_user_root()
 mirrorlist()
 install_pkg()
 sysctl()
+lost()

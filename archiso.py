@@ -88,6 +88,12 @@ def arch_chroot():
     run_command('''arch-chroot /mnt sh -c "git clone https://github.com/raBBit377/Arch_script && python /mnt/Arch_script/arch-chroot.py"''')
 
 
+def lost():
+    print(colors.fg.green + "Установка завершена. Натисніть Enter, щоб закрити скрипт." + colors.reset)
+    input()
+    sys.exit()
+
+
 # Виклик функції для встановлення Arch Linux
 clear()
 hello()
@@ -95,4 +101,4 @@ other()
 disk()
 install_system_and_tools()
 arch_chroot()
-sys.exit()
+lost()
