@@ -20,7 +20,7 @@ f"""
 log_file = "command_logs.txt"
 
 def run_command(command):
-    print(colors.fg.orange + "Running command: " + colors.reset, command)
+    print(colors.fg.yellow + "Running command: " + colors.reset, command)
     log_command(f"Running command: {command}")
 
     try:
