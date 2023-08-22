@@ -40,7 +40,7 @@ def run_command(command):
         process.wait()
 
         if process.returncode == 0:  # Перевіряємо успішне завершення команди
-            sys.stdout.write("\r" + " " * 30 + colors.fg.green_li + "\r[OK]\n" + colors.reset)
+            sys.stdout.write("\r" + " " * 30 +  "\r[OK]\n")
             sys.stdout.flush()
 
         for line in output_lines:
