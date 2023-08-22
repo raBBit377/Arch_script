@@ -40,7 +40,7 @@ def run_command(command):
         process.wait()
 
         if process.returncode == 0:  # Перевіряємо успішне завершення команди
-            sys.stdout.write("\r" + " " * 30 + "\r[OK]\n")
+            sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.green_li + "[OK]\n" + colors.reset)
             sys.stdout.flush()
         else:
             sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.red + "[ERROR]\n" + colors.reset)

@@ -9,6 +9,7 @@ class colors:
     strikethrough='\033[09m'
     invisible='\033[08m'
     class fg:
+        green_li = '\033[38;2;0;255;154m'
         black='\033[30m'
         red='\033[31m'
         green='\033[32m'

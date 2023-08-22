@@ -27,10 +27,6 @@ def run_command(command):
     print(colors.fg.green + "Running command: " + colors.reset, command)
     log_command(f"Running command: {command}")
 
-    animation_event.clear()
-    animation_thread = threading.Thread(target=loading_animation)
-    animation_thread.start()
-
     try:
         process = subprocess.Popen(
             command, shell=True, text=True,
@@ -42,20 +38,20 @@ def run_command(command):
         for line in process.stdout:
             output_lines.append(line.strip())
             if command == "clear":
-                sys.stdout.write(line)  # Вивід виводу команди в консоль
+                sys.stdout.write(line)
                 sys.stdout.flush()
 
         process.wait()
 
-        animation_event.set()
-        animation_thread.join()
-
-        if command == "clear":
-            sys.stdout.write("\r" + " " * 30 + "\r")
+        if process.returncode == 0:  # Перевіряємо успішне завершення команди
+            sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.green_li + "[OK]\n" + colors.reset)
+            sys.stdout.flush()
+        else:
+            sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.red + "[ERROR]\n" + colors.reset)
             sys.stdout.flush()
 
         for line in output_lines:
-            log_command(line)  # Запис виводу команди в лог-файл
+            log_command(line)
 
     except subprocess.CalledProcessError as e:
         log_command(colors.fg.green + f"Error command: {command}" + colors.reset)
@@ -145,14 +141,6 @@ def mirrorlist():
     run_command("reflector --verbose --country 'Ukraine,Germany' --sort rate --save /etc/pacman.d/mirrorlist")
 
 
-def black_repository():
-    run_command("curl -O https://blackarch.org/strap.sh")
-    run_command("chmod +x strap.sh")
-    run_command("strap.sh")
-    run_command("sudo pacman -Syy")
-    run_command("sudo pacman -Syu")
-    run_command("strap.sh")
-
 
 def install_pkg():
     run_command("pacman -Syy")
@@ -181,7 +169,7 @@ def install_pkg():
 
 def sysctl():
     run_command("systemctl enable NetworkManager")
-    run_command("systemctl enable sddm")
+    # run_command("systemctl enable sddm")
 
 clear()
 arch_system()
@@ -191,6 +179,5 @@ root_password()
 user_password()
 add_user_root()
 mirrorlist()
-black_repository()
 install_pkg()
 sysctl()
