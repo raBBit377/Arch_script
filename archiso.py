@@ -85,11 +85,11 @@ def install_system_and_tools():
 
 
 def arch_chroot():
-    run_command('''arch-chroot /mnt sh -c "git clone https://github.com/raBBit377/Arch_script && python /mnt/Arch_script/arch-chroot.py"''')
+    run_command('''arch-chroot /mnt sh -c "git clone https://github.com/raBBit377/Arch_script"''')
 
 
 def lost():
-    print(colors.fg.green + "Установка завершена. Натисніть Enter, щоб закрити скрипт." + colors.reset)
+    print(colors.fg.green + "Installation complete. Press Enter to close the script." + colors.reset)
     input()
     sys.exit()
 

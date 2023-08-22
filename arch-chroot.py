@@ -165,16 +165,16 @@ def install_pkg():
     run_command("pacman -S --noconfirm alsa-lib alsa-utils alsa-firmware alsa-card-profiles alsa-plugins")
     run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty firefox qbittorrent ntp")
     run_command("pacman -S --noconfirm kitty firefox xfce4 xfce4-goodies sddm")
-    run_command("pacman -Rscn --noconfirm $(pacman -Qtdq --noconfirm)")
+    # run_command("pacman -Rscn --noconfirm $(pacman -Qtdq --noconfirm)")
 
 
 def sysctl():
     run_command("systemctl enable NetworkManager")
-    # run_command("systemctl enable sddm")
+    run_command("systemctl enable sddm")
 
 
 def lost():
-    print(colors.fg.green + "Установка завершена. Натисніть Enter, щоб закрити скрипт." + colors.reset)
+    print(colors.fg.green + "Installation complete. Press Enter to close the script." + colors.reset)
     input()
     sys.exit()
 
