@@ -34,22 +34,23 @@ def run_command(command):
         for line in process.stdout:
             output_lines.append(line.strip())
             if command == "clear":
-                sys.stdout.write(line)  # Вивід виводу команди в консоль
+                sys.stdout.write(line)
                 sys.stdout.flush()
 
         process.wait()
 
-        if command == "clear":
-            sys.stdout.write("\r" + " " * 30 + "\r")
+        if process.returncode == 0:  # Перевіряємо успішне завершення команди
+            sys.stdout.write("\r" + " " * 30 + colors.fg.green_li + "\r[OK]\n" + colors.reset)
             sys.stdout.flush()
 
         for line in output_lines:
-            log_command(line)  # Запис виводу команди в лог-файл
+            log_command(line)
 
     except subprocess.CalledProcessError as e:
         log_command(colors.fg.green + f"Error command: {command}" + colors.reset)
         log_command(str(e))
         exit(1)
+
 
 def log_command(log_message):
     # Запис інформації у файл логів
