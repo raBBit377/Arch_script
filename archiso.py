@@ -39,11 +39,11 @@ def run_command(command):
 
         process.wait()
 
-        if process.returncode == 0:  # Перевіряємо успішне завершення команди
-            sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.green + "[OK]\n" + colors.reset)
-            sys.stdout.flush()
-        else:
-            sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.red + "[ERROR]\n" + colors.reset)
+        if command != "clear":
+            if process.returncode == 0:
+                sys.stdout.write("\r" + " " * 30 + "\r[OK]\n")
+            else:
+                sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.red + "[ERROR]\n" + colors.reset)
             sys.stdout.flush()
 
         for line in output_lines:
@@ -53,7 +53,6 @@ def run_command(command):
         log_command(colors.fg.green + f"Error command: {command}" + colors.reset)
         log_command(str(e))
         exit(1)
-
 
 def log_command(log_message):
     # Запис інформації у файл логів
