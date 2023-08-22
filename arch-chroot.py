@@ -4,27 +4,25 @@ import time
 import threading
 import sys
 
-log_file = "command_logs.txt"
-
-
 def clear():
     run_command("clear")
+def hello():
+    print(colors.fg.cyan +
+f"""
+ █████  ██████   ██████ ██   ██     ██      ██ ███    ██ ██    ██ ██   ██     ██ ███    ██ ███████ ████████  █████  ██      ██      
+██   ██ ██   ██ ██      ██   ██     ██      ██ ████   ██ ██    ██  ██ ██      ██ ████   ██ ██         ██    ██   ██ ██      ██      
+███████ ██████  ██      ███████     ██      ██ ██ ██  ██ ██    ██   ███       ██ ██ ██  ██ ███████    ██    ███████ ██      ██      
+██   ██ ██   ██ ██      ██   ██     ██      ██ ██  ██ ██ ██    ██  ██ ██      ██ ██  ██ ██      ██    ██    ██   ██ ██      ██      
+██   ██ ██   ██  ██████ ██   ██     ███████ ██ ██   ████  ██████  ██   ██     ██ ██   ████ ███████    ██    ██   ██ ███████ ███████
 
-animation_event = threading.Event()
+""" + colors.reset )
 
-def loading_animation():
-    animation = ["[#    ]", "[##   ]", "[###  ]", "[#### ]", "[#####]"]
-    i = 0
-    while not animation_event.is_set():  # Поки сигналізація не встановлена
-        sys.stdout.write("\r" + animation[i])
-        sys.stdout.flush()
-        i = (i + 1) % len(animation)
-        time.sleep(0.5)
-    sys.stdout.write("\r" + " " * 30 + "\r")  # Очистка останнього рядка
-    sys.stdout.flush()
+
+
+log_file = "command_logs.txt"
 
 def run_command(command):
-    print(colors.fg.green + "Running command: " + colors.reset, command)
+    print(colors.fg.yellow + "Running command: " + colors.reset, command)
     log_command(f"Running command: {command}")
 
     try:
@@ -43,11 +41,11 @@ def run_command(command):
 
         process.wait()
 
-        if process.returncode == 0:  # Перевіряємо успішне завершення команди
-            sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.green_li + "[OK]\n" + colors.reset)
-            sys.stdout.flush()
-        else:
-            sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.red + "[ERROR]\n" + colors.reset)
+        if command != "clear":
+            if process.returncode == 0:
+                sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.green + "[OK]\n" + colors.reset)
+            else:
+                sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.red + "[ERROR]\n" + colors.reset)
             sys.stdout.flush()
 
         for line in output_lines:
@@ -57,7 +55,6 @@ def run_command(command):
         log_command(colors.fg.green + f"Error command: {command}" + colors.reset)
         log_command(str(e))
         exit(1)
-
 
 def log_command(log_message):
     # Запис інформації у файл логів

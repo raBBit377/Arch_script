@@ -41,7 +41,7 @@ def run_command(command):
 
         if command != "clear":
             if process.returncode == 0:
-                sys.stdout.write("\r" + " " * 30 + "\r[OK]\n")
+                sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.green + "[OK]\n" + colors.reset)
             else:
                 sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.red + "[ERROR]\n" + colors.reset)
             sys.stdout.flush()
