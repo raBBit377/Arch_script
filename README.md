@@ -8,8 +8,18 @@
 ```bash
 command = iwctl/dhcpd
 ```
-> **step - 1 (Install git)**
+> **step - 2 (Install git)**
 
 ```bash
 pacman -Sy git
+```
+> **step - 3 (Git clone)**
+
+```bash
+git clone https://github.com/raBBit377/Arch_script/tree/main
+```
+> **step - 4 (Run script)**
+
+```bash
+python Arch_script/archiso.py
 ```
