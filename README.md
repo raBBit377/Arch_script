@@ -8,3 +8,8 @@
 ```bash
 command = iwctl/dhcpd
 ```
+> **step - 1 (Install git)**
+
+```bash
+pacman -Sy git
+```
