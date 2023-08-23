@@ -4,4 +4,5 @@
 
 > **install**
 >step - 1 (NET)
-""" command = iwctl/dhcpd """
+
+``` command = iwctl/dhcpd ```
