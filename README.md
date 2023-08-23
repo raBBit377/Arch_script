@@ -22,10 +22,10 @@ command = cfdisk /dev/sda
 > **step - 4 (Git clone)**
 
 ```bash
-git clone https://github.com/raBBit377/Arch_script/tree/main
+git clone https://github.com/raBBit377/Arch_script_install
 ```
 > **step - 5 (Run script)**
 
 ```bash
-python Arch_script/archiso.py
+python Arch_script_install/archiso.py
 ```
