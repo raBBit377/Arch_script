@@ -1,2 +1,3 @@
 # Arch_script_install
-____
+
+## A script for almost automatic installation of Arch Linux. (NOT OFFICIAL)
