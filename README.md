@@ -13,12 +13,17 @@ command = iwctl/dhcpd
 ```bash
 pacman -Sy git
 ```
-> **step - 3 (Git clone)**
+> **step - 3 (Disk)** ***You need to divide the disk into two volumes, 1 - grub (/dev/sda1), 2 - system(/dev/sda2)***
+
+```bash
+command = cfdisk /dev/sda
+```
+> **step - 4 (Git clone)**
 
 ```bash
 git clone https://github.com/raBBit377/Arch_script/tree/main
 ```
-> **step - 4 (Run script)**
+> **step - 5 (Run script)**
 
 ```bash
 python Arch_script/archiso.py
