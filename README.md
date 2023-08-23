@@ -4,4 +4,4 @@
 
 > **step - 1**
 
-``` command = iwctl/dhcpd ```
+```bash command = iwctl/dhcpd ```
