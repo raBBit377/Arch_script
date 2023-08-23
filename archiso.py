@@ -2,22 +2,26 @@ import subprocess
 from color import colors
 import sys
 
+
 def clear():
     run_command("clear")
+
+
 def hello():
     print(colors.fg.cyan +
-f"""
+          f"""
  █████  ██████   ██████ ██   ██     ██      ██ ███    ██ ██    ██ ██   ██     ██ ███    ██ ███████ ████████  █████  ██      ██      
 ██   ██ ██   ██ ██      ██   ██     ██      ██ ████   ██ ██    ██  ██ ██      ██ ████   ██ ██         ██    ██   ██ ██      ██      
 ███████ ██████  ██      ███████     ██      ██ ██ ██  ██ ██    ██   ███       ██ ██ ██  ██ ███████    ██    ███████ ██      ██      
 ██   ██ ██   ██ ██      ██   ██     ██      ██ ██  ██ ██ ██    ██  ██ ██      ██ ██  ██ ██      ██    ██    ██   ██ ██      ██      
 ██   ██ ██   ██  ██████ ██   ██     ███████ ██ ██   ████  ██████  ██   ██     ██ ██   ████ ███████    ██    ██   ██ ███████ ███████
 
-""" + colors.reset )
+""" + colors.reset)
 
 
+log_file = "full_logs.txt"
+clear_log_file = "clear_log.txt"
 
-log_file = "command_logs.txt"
 
 def run_command(command):
     print(colors.fg.yellow + "Running command: " + colors.reset, command)
@@ -42,8 +46,11 @@ def run_command(command):
         if command != "clear":
             if process.returncode == 0:
                 sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.green + "[OK]\n" + colors.reset)
+                log_clear_command(f"Running command: {command} [OK]")
             else:
                 sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.red + "[ERROR]\n" + colors.reset)
+                log_clear_command(f"Running command: {command} [ERROR]")
+                log_clear_command("\n".join(output_lines))  # Зберегти вивід команди при помилці
             sys.stdout.flush()
 
         for line in output_lines:
@@ -52,12 +59,22 @@ def run_command(command):
     except subprocess.CalledProcessError as e:
         log_command(colors.fg.green + f"Error command: {command}" + colors.reset)
         log_command(str(e))
+        log_clear_command(f"Running command: {command} [ERROR]")
+        log_clear_command(str(e))
         exit(1)
+
 
 def log_command(log_message):
     # Запис інформації у файл логів
     with open(log_file, "a") as f:
         f.write(log_message + "\n")
+
+
+def log_clear_command(log_message):
+    # Запис інформації у файл clear_log
+    with open(clear_log_file, "a") as f:
+        f.write(log_message + "\n")
+
 
 def other():
     run_command("pacman-key --init")
@@ -79,9 +96,9 @@ def disk():
 
 
 def install_system_and_tools():
-    run_command("pacstrap /mnt base base-devel btrfs-progs linux linux-headers dkms linux-lts linux-lts-headers linux-zen linux-zen-headers kitty linux-firmware nano vim netctl dhcpcd git wget curl reflector rsync zsh")
+    run_command(
+        "pacstrap /mnt base base-devel btrfs-progs linux linux-headers dkms linux-lts linux-lts-headers linux-zen linux-zen-headers kitty linux-firmware nano vim netctl dhcpcd git wget curl reflector rsync zsh")
     run_command("genfstab -pU /mnt >> /mnt/etc/fstab")
-
 
 
 def arch_chroot():

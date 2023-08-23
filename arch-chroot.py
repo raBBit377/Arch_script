@@ -1,7 +1,5 @@
 import subprocess
 from color import colors
-import time
-import threading
 import sys
 
 
@@ -21,7 +19,8 @@ def hello():
 """ + colors.reset)
 
 
-log_file = "command_logs.txt"
+log_file = "full_logs.txt"
+clear_log_file = "clear_log.txt"
 
 
 def run_command(command):
@@ -47,8 +46,11 @@ def run_command(command):
         if command != "clear":
             if process.returncode == 0:
                 sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.green + "[OK]\n" + colors.reset)
+                log_clear_command(f"Running command: {command} [OK]")
             else:
                 sys.stdout.write("\r" + " " * 30 + "\r" + colors.fg.red + "[ERROR]\n" + colors.reset)
+                log_clear_command(f"Running command: {command} [ERROR]")
+                log_clear_command("\n".join(output_lines))  # Зберегти вивід команди при помилці
             sys.stdout.flush()
 
         for line in output_lines:
@@ -57,12 +59,20 @@ def run_command(command):
     except subprocess.CalledProcessError as e:
         log_command(colors.fg.green + f"Error command: {command}" + colors.reset)
         log_command(str(e))
+        log_clear_command(f"Running command: {command} [ERROR]")
+        log_clear_command(str(e))
         exit(1)
 
 
 def log_command(log_message):
     # Запис інформації у файл логів
     with open(log_file, "a") as f:
+        f.write(log_message + "\n")
+
+
+def log_clear_command(log_message):
+    # Запис інформації у файл clear_log
+    with open(clear_log_file, "a") as f:
         f.write(log_message + "\n")
 
 
@@ -180,6 +190,7 @@ def lost():
 
 
 clear()
+hello()
 arch_system()
 grub()
 user()
