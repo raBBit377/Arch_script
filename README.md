@@ -3,7 +3,7 @@
 
 ## A script for almost automatic installation of Arch Linux. (NOT OFFICIAL)
 
-> **step - 1**
+> **step - 1 (NET)**
 
 ```bash
 command = iwctl/dhcpd
