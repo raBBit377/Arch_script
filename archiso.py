@@ -108,6 +108,7 @@ def arch_chroot():
 def lost():
     print(colors.fg.green + "Installation complete. Press Enter to close the script." + colors.reset)
     input()
+    run_command("arch-chroot.sh")
     sys.exit()
 
 
