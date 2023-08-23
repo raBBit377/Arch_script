@@ -2,7 +2,6 @@
 
 ## A script for almost automatic installation of Arch Linux. (NOT OFFICIAL)
 
-> **install**
->step - 1 (NET)
+> **step - 1**
 
-``` command = iwctl/dhcpd ```
+``` command = iwctl/dhcpd ```bash
