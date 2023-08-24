@@ -160,8 +160,10 @@ def install_pkg():
     run_command("pacman-key --populate archlinux")
     run_command("pacman -S --noconfirm lrzip unrar unzip unace p7zip squashfs-tools")
     run_command("pacman -S --noconfirm file-roller")
-    # run_command(
-    #     "pacman -S --noconfirm nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader lib32-opencl-nvidia opencl-nvidia libxnvctrl nvidia-prime")
+    run_command("pacman -S --noconfirm pcmanfm-gtk3 gvfs gvfs-mtp")
+    run_command("pacman -S --noconfirm steam")
+
+    run_command("pacman -S --noconfirm nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader lib32-opencl-nvidia opencl-nvidia libxnvctrl nvidia-prime")
     run_command("mkinitcpio -P")
     run_command("pacman -S --noconfirm xorg-server xorg-server-common xorg-xinit")
     run_command("pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-liberation")
@@ -173,14 +175,15 @@ def install_pkg():
     run_command("pacman -S --noconfirm dialog wpa_supplicant dhcpcd netctl networkmanager network-manager-applet ppp")
     run_command("pacman -S --noconfirm pulseaudio pulseaudio-alsa pulseaudio-jack pavucontrol")
     run_command("pacman -S --noconfirm alsa-lib alsa-utils alsa-firmware alsa-card-profiles alsa-plugins")
-    run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty firefox qbittorrent ntp")
-    run_command("pacman -S --noconfirm kitty firefox xfce4 xfce4-goodies sddm")
+    run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty firefox ccache qbittorrent ntp")
+    run_command("pacman -S --noconfirm kitty firefox xfce4 xfce4-goodies ly")
+    run_command(r"fstrim -v /")
     # run_command("pacman -Rscn --noconfirm $(pacman -Qtdq --noconfirm)")
 
 
 def sysctl():
     run_command("systemctl enable NetworkManager")
-    run_command("systemctl enable sddm")
+    run_command("systemctl enable ly")
 
 
 def lost():
