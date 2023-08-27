@@ -165,8 +165,6 @@ def install_pkg():
     run_command("pacman-key --init")
     run_command("pacman-key --populate archlinux")
 
-    # run_command("pacman -Rscn --noconfirm $(pacman -Qtdq --noconfirm)")
-
 
 def de_win():
     run_command("pacman -S --noconfirm xfce4 xfce4-goodies ly")
@@ -188,7 +186,7 @@ def net():
 
 
 def fonts():
-    run_command("pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-liberation ttf-dajavu")
+    run_command("pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-liberation ttf-dejavu")
 
 
 def xorg():
@@ -234,36 +232,40 @@ def other():
     run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty bleachbit")
     run_command("pacman -S --noconfirm steam firefox qbittorrent ntp go ntfs-3g")
     run_command("pacman -S --noconfirm gufw")
-    run_command("systemctl enable --now ufw.service")
+    run_command("systemctl enable ufw.service")
 
 
 def optimizm():
-    run_command(r"fstrim -v /")
+    run_command("systemctl enable fstrim.timer ")
+    run_command("fstrim -av")
     run_command("pacman -S --noconfirm rng-tools")
-    run_command("systemctl enable --now rngd")
+    run_command("systemctl enable rngd")
     run_command("pacman -S --noconfirm dbus-broker")
-    run_command("systemctl enable --now dbus-broker.service")
+    run_command("systemctl enable dbus-broker.service")
     run_command("systemctl --global enable dbus-broker.service")
     run_command("pacman -S --noconfirm irqbalance")
-    run_command("systemctl enable --now irqbalance")
+    run_command("systemctl enable irqbalance")
     run_command("pacman -S --noconfirm jemalloc")
     run_command('echo "LD_PRELOAD=/usr/lib/libjemalloc.so" >> /etc/environment')
     run_command("systemctl mask NetworkManager-wait-online.service")
+
     uncomment_lines = [
         ("HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck)",
          "HOOKS=(systemd autodetect modconf kms keyboard keymap block filesystems fsck)")
     ]
     modify_lines_in_file("/etc/mkinitcpio.conf", uncomment_lines)
+
     run_command("mkinitcpio -P")
+
     uncomment_lines = [
-        ('GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet")',
+        ('GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"',
          'GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 rootfstype=btrfs page_alloc.shuffle=1 split_lock_detect=off raid=noautodetect nowatchdog"')
     ]
+
     modify_lines_in_file("/etc/default/grub", uncomment_lines)
     run_command("grub-mkconfig -o /boot/grub/grub.cfg")
     run_command("pacman -S --noconfirm gamemode lib32-gamemode gamescope")
     run_command("systemctl --user enable gamemoded")
-
 
 def lost():
     print(colors.fg.green + "Installation complete. Press Enter to close the script." + colors.reset)
