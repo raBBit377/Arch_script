@@ -12,7 +12,7 @@ command = iwctl/dhcpd
 > **step - 2 (Install git)**
 
 ```bash
-pacman -Sy git
+pacman -Sy git glibc
 ```
 > **step - 3 (Disk)** ***You need to divide the disk into two volumes, 1 - grub (/dev/sda1), 2 - system(/dev/sda2)***
 
