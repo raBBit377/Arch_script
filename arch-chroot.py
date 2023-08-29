@@ -234,6 +234,14 @@ def other():
     run_command("pacman -S --noconfirm gufw")
     run_command("systemctl enable ufw.service")
 
+def yay():
+    run_command("git clone https://aur.archlinux.org/yay.git")
+    run_command("cd yay/")
+    run_command("makepkg -si --noconfirm")
+    run_command("cd ..")
+    run_command("rm -rf yay")
+
+
 
 def optimizm():
     run_command("systemctl enable fstrim.timer ")
@@ -251,7 +259,9 @@ def optimizm():
 
     uncomment_lines = [
         ("HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck)",
-         "HOOKS=(systemd autodetect modconf kms keyboard keymap block filesystems fsck)")
+         "HOOKS=(systemd autodetect modconf kms keymap keyboard  block btrfs usr)"
+         ),
+        ("MODULES=()", "MODULES=(btrfs nvme i915 nvidia)")
     ]
     modify_lines_in_file("/etc/mkinitcpio.conf", uncomment_lines)
 
@@ -259,7 +269,7 @@ def optimizm():
 
     uncomment_lines = [
         ('GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"',
-         'GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 rootfstype=btrfs page_alloc.shuffle=1 split_lock_detect=off raid=noautodetect nowatchdog"')
+         'GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 rootfstype=btrfs page_alloc.shuffle=1 split_lock_detect=off raid=noautodetect nowatchdog noibrs noibpb nospec_store_bypass_disable no_stf_barrier mitigations=off"')
     ]
 
     modify_lines_in_file("/etc/default/grub", uncomment_lines)
@@ -295,5 +305,6 @@ archive()
 intel()
 nvidia()
 other()
+yay()
 optimizm()
 lost()
