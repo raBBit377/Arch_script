@@ -241,7 +241,11 @@ def yay():
     run_command("cd ..")
     run_command("rm -rf yay")
 
-
+def zsh():
+    run_command("pacman -S --noconfirm zsh")
+    run_command('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"')
+    run_command('sudo -u user sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"')
+    run_command("sudo -u user chsh -s /bin/zsh")
 
 def optimizm():
     run_command("systemctl enable fstrim.timer ")
@@ -306,5 +310,6 @@ intel()
 nvidia()
 other()
 yay()
+zsh()
 optimizm()
 lost()
