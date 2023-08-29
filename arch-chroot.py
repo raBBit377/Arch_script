@@ -240,9 +240,8 @@ def yay():
 
 def zsh():
     run_command("pacman -S --noconfirm zsh")
-    run_command('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"')
-    run_command('sudo -u user sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"')
-    # run_command("sudo -u user chsh -s /bin/zsh")
+    run_command('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
+    run_command('sudo -u user sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
 
 def optimizm():
     run_command("systemctl enable fstrim.timer ")
