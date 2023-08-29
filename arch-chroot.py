@@ -235,17 +235,14 @@ def other():
     run_command("systemctl enable ufw.service")
 
 def yay():
-    run_command("git clone https://aur.archlinux.org/yay.git")
-    run_command("cd yay/")
-    run_command("makepkg -si --noconfirm")
-    run_command("cd ..")
-    run_command("rm -rf yay")
+    run_command("pacman -S --noconfirm yay")
+
 
 def zsh():
     run_command("pacman -S --noconfirm zsh")
     run_command('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"')
     run_command('sudo -u user sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"')
-    run_command("sudo -u user chsh -s /bin/zsh")
+    # run_command("sudo -u user chsh -s /bin/zsh")
 
 def optimizm():
     run_command("systemctl enable fstrim.timer ")
