@@ -234,14 +234,35 @@ def other():
     run_command("pacman -S --noconfirm gufw")
     run_command("systemctl enable ufw.service")
 
+
 def yay():
     run_command("pacman -S --noconfirm yay")
 
 
 def zsh():
     run_command("pacman -S --noconfirm zsh")
-    run_command('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
-    run_command('sudo -u user sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
+    run_command(
+        'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
+    run_command(
+        'sudo -u user sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
+    run_command("chsh -s /bin/zsh user")
+    run_command("chsh -s /bin/zsh root")
+    uncomment_lines = [
+        ("# export PATH=$HOME/bin:/usr/local/bin:$PATH",
+         "export TERM=xterm \nexport TERM=xterm-color \nexport TERM=xterm-256color"),
+        ("plugins=(git)",
+         "plugins=( \nzsh-autosuggestions \nzsh-syntax-highlighting \ngit \n)")
+    ]
+    modify_lines_in_file("home/user/.zshrc", uncomment_lines)
+    run_command(
+        'git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions')
+    run_command(
+        'sudo -u user git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions')
+    run_command(
+        'git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting')
+    run_command(
+        'sudo -u user git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting')
+
 
 def optimizm():
     run_command("systemctl enable fstrim.timer ")
@@ -256,6 +277,18 @@ def optimizm():
     run_command("pacman -S --noconfirm jemalloc")
     run_command('echo "LD_PRELOAD=/usr/lib/libjemalloc.so" >> /etc/environment')
     run_command("systemctl mask NetworkManager-wait-online.service")
+    run_command("sudo -u user yay -S nvidia-tweaks  --noconfirm")
+    run_command("sudo -u user yay -S ananicy-cpp-git  --noconfirm")
+    run_command("sudo -u user yay -S ananicy-cpp-git  --noconfirm")
+    run_command("systemctl enable ananicy-cpp")
+    run_command("sudo -u user yay -S uksmd-git  --noconfirm")
+    run_command("systemctl enable uksmd")
+    run_command("pacman -S --noconfirm cpupower")
+    run_command("sudo -u user yay -S portproton --noconfirm")
+    run_command("sudo -u user yay -S dxvk-mingw-git --noconfirm")
+    run_command("sudo -u user yay -S vkd3d-proton-git --noconfirm")
+    run_command("sudo -u user yay -S stacer-git --noconfirm")
+    run_command("sudo -u user yay -S bleachbit-git --noconfirm")
 
     uncomment_lines = [
         ("HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck)",
@@ -276,6 +309,7 @@ def optimizm():
     run_command("grub-mkconfig -o /boot/grub/grub.cfg")
     run_command("pacman -S --noconfirm gamemode lib32-gamemode gamescope")
     run_command("systemctl --user enable gamemoded")
+
 
 def lost():
     print(colors.fg.green + "Installation complete. Press Enter to close the script." + colors.reset)
