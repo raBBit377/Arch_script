@@ -256,12 +256,12 @@ def zsh():
     modify_lines_in_file("home/user/.zshrc", uncomment_lines)
     run_command(
         'git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions')
-    run_command(
-        'sudo -u user git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions')
+    # run_command(
+        # 'sudo -u user git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions')
     run_command(
         'git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting')
-    run_command(
-        'sudo -u user git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting')
+    # run_command(
+    #     'sudo -u user git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting')
 
 
 def optimizm():
@@ -277,18 +277,18 @@ def optimizm():
     run_command("pacman -S --noconfirm jemalloc")
     run_command('echo "LD_PRELOAD=/usr/lib/libjemalloc.so" >> /etc/environment')
     run_command("systemctl mask NetworkManager-wait-online.service")
-    run_command("sudo -u user yay -S nvidia-tweaks  --noconfirm")
-    run_command("sudo -u user yay -S ananicy-cpp-git  --noconfirm")
-    run_command("sudo -u user yay -S ananicy-cpp-git  --noconfirm")
+    run_command("sudo -n -u user yay -S nvidia-tweaks --noconfirm")
+    run_command("sudo -n -u user yay -S ananicy-cpp-git --noconfirm")
+    run_command("sudo -n -u user yay -S ananicy-cpp-git --noconfirm")
     run_command("systemctl enable ananicy-cpp")
-    run_command("sudo -u user yay -S uksmd-git  --noconfirm")
+    run_command("sudo -n -u user yay -S uksmd-git --noconfirm")
     run_command("systemctl enable uksmd")
     run_command("pacman -S --noconfirm cpupower")
-    run_command("sudo -u user yay -S portproton --noconfirm")
-    run_command("sudo -u user yay -S dxvk-mingw-git --noconfirm")
-    run_command("sudo -u user yay -S vkd3d-proton-git --noconfirm")
-    run_command("sudo -u user yay -S stacer-git --noconfirm")
-    run_command("sudo -u user yay -S bleachbit-git --noconfirm")
+    run_command("sudo -n -u user yay -S portproton --noconfirm")
+    run_command("sudo -n -u user yay -S dxvk-mingw-git --noconfirm")
+    run_command("sudo -n -u user yay -S vkd3d-proton-git --noconfirm")
+    run_command("sudo -n -u user yay -S stacer-git --noconfirm")
+    run_command("sudo -n -u user yay -S bleachbit-git --noconfirm")
 
     uncomment_lines = [
         ("HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck)",
