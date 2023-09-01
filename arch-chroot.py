@@ -135,7 +135,7 @@ def user_password():
 
 def add_user_root():
     run_command("sed -i '/root ALL=(ALL:ALL) ALL/a user ALL=(ALL:ALL) ALL/a user ALL=(ALL:ALL) ALL NOPASSWD: /usr/bin/yay' /etc/sudoers")
-    run_command("sed -i '/user ALL=(ALL:ALL) ALL/a user ALL=(ALL:ALL) ALL NOPASSWD: /usr/bin/yay' /etc/sudoers ")
+    run_command("sed -i '/user ALL=(ALL:ALL) ALL/a user ALL=(ALL:ALL) ALL NOPASSWD: /usr/bin/yay' /etc/sudoers")
 
 
 def mirrorlist():
