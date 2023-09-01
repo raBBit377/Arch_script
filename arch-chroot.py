@@ -135,7 +135,7 @@ def user_password():
 
 def add_user_root():
     uncomment_lines = [
-        ("root ALL=(ALL:ALL) ALL", "root ALL=(ALL:ALL) ALL \nuser ALL=(ALL:ALL) ALL NOPASSWD: /usr/bin/yay"),
+        ("root ALL=(ALL:ALL) ALL", "root ALL=(ALL:ALL) ALL \nuser ALL=(ALL:ALL) ALL  \nuser ALL=(ALL:ALL) NOPASSWD: /usr/bin/yay"),
     ]
     modify_lines_in_file("etc/sudoers", uncomment_lines)
 
