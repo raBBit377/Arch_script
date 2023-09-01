@@ -134,7 +134,7 @@ def user_password():
 
 
 def add_user_root():
-    run_command(r"sed -i '/root ALL=(ALL:ALL) ALL/a user ALL=(ALL:ALL) ALL' /etc/sudoers")
+    run_command("sed -i '/root ALL=(ALL:ALL) ALL/a user ALL=(ALL:ALL) ALL \nuser ALL=(ALL:ALL) ALL NOPASSWD: /usr/bin/yay' /etc/sudoers ")
 
 
 def mirrorlist():
@@ -227,10 +227,15 @@ def nvidia():
     run_command("pacman -S --noconfirm nvidia-prime")
     run_command("mkinitcpio -P")
 
+def virtual():
+    run_command("pacman -S --noconfirm  virtualbox-host-dkms")
+    run_command("usermod -aG vboxusers user")
+
 
 def other():
     run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty bleachbit")
-    run_command("pacman -S --noconfirm steam firefox qbittorrent ntp go ntfs-3g")
+    run_command("pacman -S --noconfirm steam firefox qbittorrent ntp go ntfs-3g htop nvtop man-db kdiskmark")
+    run_command("pacman -S --noconfirm shotcut handbrake audacity mediainfo-gui")
     run_command("pacman -S --noconfirm gufw")
     run_command("systemctl enable ufw.service")
 
@@ -289,6 +294,7 @@ def optimizm():
     run_command("sudo -n -u user yay -S vkd3d-proton-git --noconfirm")
     run_command("sudo -n -u user yay -S stacer-git --noconfirm")
     run_command("sudo -n -u user yay -S bleachbit-git --noconfirm")
+    run_command("sudo -n -u user yay -S ventoy-bin --noconfirm")
 
     uncomment_lines = [
         ("HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck)",
