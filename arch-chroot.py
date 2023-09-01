@@ -135,7 +135,7 @@ def user_password():
 
 def add_user_root():
     uncomment_lines = [
-        ("root ALL=(ALL:ALL) ALL", "root ALL=(ALL:ALL) ALL \nuser ALL=(ALL:ALL) ALL  \nuser ALL=(ALL:ALL) NOPASSWD: /usr/bin/yay"),
+        ("root ALL=(ALL:ALL) ALL", "root ALL=(ALL:ALL) ALL \nuser ALL=(ALL:ALL) NOPASSWD: ALL"),
     ]
     modify_lines_in_file("etc/sudoers", uncomment_lines)
 
@@ -321,6 +321,10 @@ def optimizm():
 
 
 def lost():
+    uncomment_lines = [
+        ("user ALL=(ALL:ALL) NOPASSWD: ALL", "user ALL=(ALL:ALL) ALL"),
+    ]
+    modify_lines_in_file("etc/sudoers", uncomment_lines)
     print(colors.fg.green + "Installation complete. Press Enter to close the script." + colors.reset)
     input()
     sys.exit()
