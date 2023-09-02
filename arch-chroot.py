@@ -88,7 +88,7 @@ def clear():
 
 
 def arch_system():
-    run_command("echo 'User-PC' >> /etc/hostname")
+    run_command("echo 'USER-PC' >> /etc/hostname")
     run_command("ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime")
     uncomment_lines = [
         ("#en_US.UTF-8 UTF-8", "en_US.UTF-8 UTF-8"),
@@ -237,7 +237,7 @@ def virtual():
 
 def other():
     run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty bleachbit")
-    run_command("pacman -S --noconfirm steam firefox qbittorrent ntp go ntfs-3g htop nvtop man-db kdiskmark")
+    run_command("pacman -S --noconfirm steam firefox qbittorrent ntp go ntfs-3g htop nvtop man-db kdiskmark bleachbit")
     run_command("pacman -S --noconfirm shotcut handbrake audacity mediainfo-gui libreoffice-fresh")
     run_command("pacman -S --noconfirm gufw")
     run_command("systemctl enable ufw.service")
@@ -283,7 +283,6 @@ def optimizm():
     run_command("systemctl mask NetworkManager-wait-online.service")
     run_command("sudo -n -u user yay -S nvidia-tweaks --noconfirm")
     run_command("sudo -n -u user yay -S ananicy-cpp-git --noconfirm")
-    run_command("sudo -n -u user yay -S ananicy-cpp-git --noconfirm")
     run_command("systemctl enable ananicy-cpp")
     run_command("sudo -n -u user yay -S uksmd-git --noconfirm")
     run_command("systemctl enable uksmd")
@@ -292,7 +291,6 @@ def optimizm():
     run_command("sudo -n -u user yay -S dxvk-mingw-git --noconfirm")
     run_command("sudo -n -u user yay -S vkd3d-proton-git --noconfirm")
     run_command("sudo -n -u user yay -S stacer-git --noconfirm")
-    run_command("sudo -n -u user yay -S bleachbit-cli --noconfirm")
     run_command("sudo -n -u user yay -S ventoy-bin --noconfirm")
 
     uncomment_lines = [
@@ -315,12 +313,21 @@ def optimizm():
     run_command("pacman -S --noconfirm gamemode lib32-gamemode gamescope")
     run_command("systemctl --user enable gamemoded")
 
+def localh():
+    uncomment_lines = [
+        ("# See hosts(5) for details.", 
+         "127.0.0.1        localhost \n::1              localhost \n127.0.1.1        USER-PC")
+    ]
+    modify_lines_in_file("etc/pacman.conf", uncomment_lines)
 
 def lost():
     uncomment_lines = [
         ("user ALL=(ALL:ALL) NOPASSWD: ALL", "user ALL=(ALL:ALL) ALL"),
     ]
     modify_lines_in_file("etc/sudoers", uncomment_lines)
+
+    run_command("mkinitcpio -P")
+
     print(colors.fg.green + "Installation complete. Press Enter to close the script." + colors.reset)
     input()
     sys.exit()
