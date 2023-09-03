@@ -238,7 +238,7 @@ def virtual():
 def other():
     run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty bleachbit")
     run_command("pacman -S --noconfirm steam firefox qbittorrent ntp go ntfs-3g htop nvtop man-db kdiskmark bleachbit")
-    run_command("pacman -S --noconfirm shotcut handbrake audacity mediainfo-gui libreoffice-fresh")
+    run_command("pacman -S --noconfirm shotcut handbrake audacity mediainfo-gui libreoffice-fresh libreoffice-fresh")
     run_command("pacman -S --noconfirm gufw")
     run_command("systemctl enable ufw.service")
 
