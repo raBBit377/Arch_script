@@ -82,17 +82,17 @@ def other():
 
 
 def disk():
-    run_command("mkfs.btrfs -f /dev/sda2")
-    run_command("mkfs.fat -F32 /dev/sda1")
-    run_command("mount /dev/sda2 /mnt")
+    run_command("mkfs.btrfs -f /dev/nvme0n1p2")
+    run_command("mkfs.fat -F32 /dev/nvme0n1p1")
+    run_command("mount /dev/nvme0n1p2 /mnt")
     run_command("btrfs subvolume create /mnt/@root")
     run_command("btrfs subvolume create /mnt/@home")
     run_command("umount /mnt")
-    run_command("mount -o noatime,ssd,compress=zstd:3,subvol=@root /dev/sda2 /mnt")
+    run_command("mount -o noatime,ssd,compress=zstd:3,subvol=@root /dev/nvme0n1p2 /mnt")
     run_command("mkdir -p /mnt/boot/efi /mnt/home")
     run_command("mkdir -p /var /log /tmp")
-    run_command("mount /dev/sda1 /mnt/boot/efi")
-    run_command("mount -o noatime,ssd,compress=zstd:3,subvol=@home /dev/sda2 /mnt/home")
+    run_command("mount /dev/nvme0n1p1 /mnt/boot/efi")
+    run_command("mount -o noatime,ssd,compress=zstd:3,subvol=@home /dev/nvme0n1p2 /mnt/home")
     run_command("lsblk")
 
 
