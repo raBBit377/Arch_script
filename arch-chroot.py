@@ -278,8 +278,6 @@ def optimizm():
     run_command("systemctl --global enable dbus-broker.service")
     run_command("pacman -S --noconfirm irqbalance")
     run_command("systemctl enable irqbalance")
-    run_command("pacman -S --noconfirm jemalloc")
-    run_command('echo "LD_PRELOAD=/usr/lib/libjemalloc.so" >> /etc/environment')
     run_command("systemctl mask NetworkManager-wait-online.service")
     run_command("sudo -n -u user yay -S nvidia-tweaks --noconfirm")
     run_command("sudo -n -u user yay -S ananicy-cpp-git --noconfirm")
