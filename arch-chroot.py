@@ -252,8 +252,8 @@ def zsh():
     run_command(
         'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
     run_command(
-        'sudo -u user sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
-    run_command("chsh -s /bin/zsh user")
+        'sudo -u user sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended')
+    run_command("sudo chsh -s /bin/zsh user")
     run_command("chsh -s /bin/zsh root")
     uncomment_lines = [
         ("# export PATH=$HOME/bin:/usr/local/bin:$PATH",
