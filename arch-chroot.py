@@ -118,7 +118,7 @@ def grub():
 
 
 def user():
-    run_command("useradd -m -g users -G wheel -s /bin/zsh user")
+    run_command("useradd -m -g user -G wheel,users -s /bin/zsh user")
 
 
 def root_password():
@@ -237,7 +237,7 @@ def virtual():
 
 def other():
     run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty bleachbit")
-    run_command("pacman -S --noconfirm steam firefox qbittorrent ntp go ntfs-3g htop nvtop man-db kdiskmark bleachbit")
+    run_command("pacman -S --noconfirm steam firefox qbittorrent ntp go ntfs-3g htop nvtop man-db kdiskmark bleachbit syslog-ng")
     run_command("pacman -S --noconfirm shotcut handbrake audacity mediainfo-gui libreoffice-fresh libreoffice-fresh")
     run_command("pacman -S --noconfirm gufw")
     run_command("systemctl enable ufw.service")
@@ -253,7 +253,7 @@ def zsh():
         'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
     run_command(
         'sudo -u user sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended')
-    run_command("sudo chsh -s /bin/zsh user")
+    run_command("chsh -s /bin/zsh user")
     run_command("chsh -s /bin/zsh root")
     uncomment_lines = [
         ("# export PATH=$HOME/bin:/usr/local/bin:$PATH",
