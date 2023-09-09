@@ -118,7 +118,7 @@ def grub():
 
 
 def user():
-    run_command("useradd -m -G wheel -s /bin/zsh user")
+    run_command("useradd -m -s /bin/zsh user")
 
 
 def root_password():
