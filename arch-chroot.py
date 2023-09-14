@@ -237,7 +237,7 @@ def virtual():
 
 def other():
     run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty bleachbit gparted gpart flameshot")
-    run_command("pacman -S --noconfirm ffmpeg libx264 x265 lame flac libfdk-aac libdvdcss")
+    run_command("pacman -S --noconfirm ffmpeg libx264 x265 lame flac libfdk-aac libdvdcss cpupower")
     run_command("pacman -S --noconfirm steam firefox qbittorrent ntp go ntfs-3g htop nvtop man-db kdiskmark bleachbit syslog-ng")
     run_command("pacman -S --noconfirm shotcut handbrake audacity mediainfo-gui libreoffice-fresh libreoffice-fresh")
     run_command("pacman -S --noconfirm gufw")
@@ -285,7 +285,7 @@ def optimizm():
     run_command("systemctl enable ananicy-cpp")
     run_command("sudo -n -u user yay -S uksmd-git --noconfirm")
     run_command("systemctl enable uksmd")
-    run_command("pacman -S --noconfirm cpupower")
+    run_command("pacman -S --noconfirm cpuer")
     run_command("sudo -n -u user yay -S portproton --noconfirm")
     run_command("sudo -n -u user yay -S dxvk-mingw-git --noconfirm")
     run_command("sudo -n -u user yay -S vkd3d-proton-git --noconfirm")
