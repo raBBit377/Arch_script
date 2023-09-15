@@ -237,10 +237,10 @@ def virtual():
 
 def other():
     run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty bleachbit gparted gpart flameshot")
-    run_command("pacman -S --noconfirm ffmpeg libx264 x265 lame flac libfdk-aac libdvdcss cpupower")
+    run_command("pacman -S --noconfirm ffmpeg libx264 x265 lame flac libfdk-aac libdvdcss cpupower vivaldi vivaldi-ffmpeg-codecs")
     run_command("pacman -S --noconfirm steam firefox qbittorrent ntp go ntfs-3g htop nvtop man-db kdiskmark bleachbit syslog-ng")
     run_command("pacman -S --noconfirm shotcut handbrake audacity mediainfo-gui libreoffice-fresh libreoffice-fresh")
-    run_command("pacman -S --noconfirm gufw")
+    run_command("pacman -S --noconfirm gufw bitwarden")
     run_command("systemctl enable ufw.service")
 
 
