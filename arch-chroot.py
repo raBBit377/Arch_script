@@ -262,9 +262,9 @@ def zsh():
     ]
     modify_lines_in_file(f"home/{user_name}/.zshrc", uncomment_lines)
     run_command('git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions')
-    run_command(f'sudo -u {user_name} git clone https://github.com/zsh-users/zsh-autosuggestions /home/user/.oh-my-zsh/custom/plugins/zsh-autosuggestions')
+    run_command(f'sudo -u {user_name} git clone https://github.com/zsh-users/zsh-autosuggestions /home/{user_name}/.oh-my-zsh/custom/plugins/zsh-autosuggestions')
     run_command('git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting')
-    run_command(f'sudo -u {user_name} git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /home/user/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting')
+    run_command(f'sudo -u {user_name} git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /home/{user_name}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting')
 
 
 def optimizm():
