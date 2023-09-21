@@ -1,6 +1,7 @@
 import subprocess
 from color import colors
 import sys
+from meaning import host_user_name, user_name, passwd_user, passwd_root
 
 
 def hello():
@@ -88,7 +89,7 @@ def clear():
 
 
 def arch_system():
-    run_command("echo 'USER-PC' >> /etc/hostname")
+    run_command(f"echo '{host_user_name}' >> /etc/hostname")
     run_command("ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime")
     uncomment_lines = [
         ("#en_US.UTF-8 UTF-8", "en_US.UTF-8 UTF-8"),
@@ -118,24 +119,22 @@ def grub():
 
 
 def user():
-    run_command("useradd -m -s /bin/zsh user")
+    run_command(f"useradd -m -s /bin/zsh {user_name}")
 
 
 def root_password():
-    new_password = "1234"  # Замініть на фактичний пароль
-    command = f"echo '{new_password}\n{new_password}' | passwd"
+    command = f"echo '{passwd_root}\n{passwd_root}' | passwd"
     subprocess.run(command, shell=True)
 
 
 def user_password():
-    new_password = "1234"  # Замініть на фактичний пароль
-    command = f"echo '{new_password}\n{new_password}' | passwd user"
+    command = f"echo '{passwd_user}\n{passwd_user}' | passwd user"
     subprocess.run(command, shell=True)
 
 
 def add_user_root():
     uncomment_lines = [
-        ("root ALL=(ALL:ALL) ALL", "root ALL=(ALL:ALL) ALL \nuser ALL=(ALL:ALL) NOPASSWD: ALL"),
+        (f"root ALL=(ALL:ALL) ALL", f"root ALL=(ALL:ALL) ALL \n{user_name} ALL=(ALL:ALL) NOPASSWD: ALL"),
     ]
     modify_lines_in_file("etc/sudoers", uncomment_lines)
 
@@ -232,15 +231,14 @@ def nvidia():
 
 def virtual():
     run_command("pacman -S --noconfirm  virtualbox-host-dkms")
-    run_command("usermod -aG vboxusers user")
+    run_command(f"usermod -aG vboxusers {user_name}")
 
 
 def other():
-    run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty bleachbit gparted gpart flameshot")
-    run_command("pacman -S --noconfirm ffmpeg libx264 x265 lame flac libfdk-aac libdvdcss cpupower vivaldi vivaldi-ffmpeg-codecs")
+    run_command("pacman -S --noconfirm grub-customizer obs-studio vlc kitty bleachbit")
     run_command("pacman -S --noconfirm steam firefox qbittorrent ntp go ntfs-3g htop nvtop man-db kdiskmark bleachbit syslog-ng")
     run_command("pacman -S --noconfirm shotcut handbrake audacity mediainfo-gui libreoffice-fresh libreoffice-fresh")
-    run_command("pacman -S --noconfirm gufw bitwarden")
+    run_command("pacman -S --noconfirm gufw")
     run_command("systemctl enable ufw.service")
 
 
@@ -253,20 +251,20 @@ def zsh():
     run_command(
         'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
     run_command(
-        'sudo -u user sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended')
-    run_command("chsh -s /bin/zsh user")
-    run_command("chsh -s /bin/zsh root")
+        f'sudo -u {user_name} sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended')
+    run_command(f"chsh -s /bin/zsh {user_name}")
+    run_command(f"chsh -s /bin/zsh root")
     uncomment_lines = [
         ("# export PATH=$HOME/bin:/usr/local/bin:$PATH",
          "export TERM=xterm \nexport TERM=xterm-color \nexport TERM=xterm-256color"),
         ("plugins=(git)",
          "plugins=( \nzsh-autosuggestions \nzsh-syntax-highlighting \ngit \n)")
     ]
-    modify_lines_in_file("home/user/.zshrc", uncomment_lines)
+    modify_lines_in_file(f"home/{user_name}/.zshrc", uncomment_lines)
     run_command('git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions')
-    run_command('sudo -u user git clone https://github.com/zsh-users/zsh-autosuggestions /home/user/.oh-my-zsh/custom/plugins/zsh-autosuggestions')
+    run_command(f'sudo -u {user_name} git clone https://github.com/zsh-users/zsh-autosuggestions /home/user/.oh-my-zsh/custom/plugins/zsh-autosuggestions')
     run_command('git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting')
-    run_command('sudo -u user git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /home/user/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting')
+    run_command(f'sudo -u {user_name} git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /home/user/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting')
 
 
 def optimizm():
@@ -280,17 +278,17 @@ def optimizm():
     run_command("pacman -S --noconfirm irqbalance")
     run_command("systemctl enable irqbalance")
     run_command("systemctl mask NetworkManager-wait-online.service")
-    run_command("sudo -n -u user yay -S nvidia-tweaks --noconfirm")
-    run_command("sudo -n -u user yay -S ananicy-cpp-git --noconfirm")
+    run_command(f"sudo -n -u {user_name} yay -S nvidia-tweaks --noconfirm")
+    run_command(f"sudo -n -u {user_name} yay -S ananicy-cpp-git --noconfirm")
     run_command("systemctl enable ananicy-cpp")
-    run_command("sudo -n -u user yay -S uksmd-git --noconfirm")
+    run_command(f"sudo -n -u {user_name} yay -S uksmd-git --noconfirm")
     run_command("systemctl enable uksmd")
-    run_command("pacman -S --noconfirm cpuer")
-    run_command("sudo -n -u user yay -S portproton --noconfirm")
-    run_command("sudo -n -u user yay -S dxvk-mingw-git --noconfirm")
-    run_command("sudo -n -u user yay -S vkd3d-proton-git --noconfirm")
-    run_command("sudo -n -u user yay -S stacer-git --noconfirm")
-    run_command("sudo -n -u user yay -S ventoy-bin --noconfirm")
+    run_command("pacman -S --noconfirm cpupower")
+    run_command(f"sudo -n -u {user_name} yay -S portproton --noconfirm")
+    run_command(f"sudo -n -u {user_name} yay -S dxvk-mingw-git --noconfirm")
+    run_command(f"sudo -n -u {user_name} yay -S vkd3d-proton-git --noconfirm")
+    run_command(f"sudo -n -u {user_name} yay -S stacer-git --noconfirm")
+    run_command(f"sudo -n -u {user_name} yay -S ventoy-bin --noconfirm")
 
     uncomment_lines = [
         ("HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck)",
@@ -315,13 +313,13 @@ def optimizm():
 def localh():
     uncomment_lines = [
         ("# See hosts(5) for details.",
-         "127.0.0.1        localhost \n::1              localhost \n127.0.1.1        USER-PC")
+         f"127.0.0.1        localhost \n::1              localhost \n127.0.1.1        {host_user_name}")
     ]
     modify_lines_in_file("etc/pacman.conf", uncomment_lines)
 
 def lost():
     uncomment_lines = [
-        ("user ALL=(ALL:ALL) NOPASSWD: ALL", "user ALL=(ALL:ALL) ALL"),
+        (f"{user_name} ALL=(ALL:ALL) NOPASSWD: ALL", f"{user_name} ALL=(ALL:ALL) ALL"),
     ]
     modify_lines_in_file("etc/sudoers", uncomment_lines)
 
