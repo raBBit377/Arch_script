@@ -87,7 +87,7 @@ def disk():
     # run_command("mkfs.fat -F32 /dev/nvme0n1p1")
     run_command("mkfs.fat -F32 /dev/sda1")
     # run_command("mount /dev/nvme0n1p2 /mnt")
-    run_command("mount /dev/dev/sda2 /mnt")
+    run_command("mount /dev/sda2 /mnt")
     run_command("btrfs subvolume create /mnt/@root")
     run_command("btrfs subvolume create /mnt/@home")
     run_command("umount /mnt")
