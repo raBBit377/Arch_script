@@ -128,7 +128,7 @@ def root_password():
 
 
 def user_password():
-    command = f"echo '{passwd_user}\n{passwd_user}' | passwd user"
+    command = f"echo '{passwd_user}\n{passwd_user}' | passwd {user_name}"
     subprocess.run(command, shell=True)
 
 
