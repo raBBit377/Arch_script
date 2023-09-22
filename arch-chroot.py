@@ -170,8 +170,9 @@ def install_pkg():
 
 
 def de_win():
-    run_command("pacman -S --noconfirm xfce4 xfce4-goodies ly")
-    run_command("systemctl enable ly")
+    # run_command("pacman -S --noconfirm xfce4 xfce4-goodies ly")
+    run_command("pacman -S --noconfirm awesome")
+    # run_command("systemctl enable ly")
 
 
 def audio():
