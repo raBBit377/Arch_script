@@ -106,7 +106,8 @@ def arch_system():
 def grub():
     run_command("pacman -Syy")
     run_command("pacman -S --noconfirm grub efibootmgr")
-    run_command("grub-install /dev/sda")
+    # run_command("grub-install /dev/sda")
+    run_command("grub-install /dev/nvme0n1")
     run_command("pacman -S --noconfirm os-prober mtools fuse")
     run_command("grub-mkconfig -o /boot/grub/grub.cfg")
 
