@@ -185,8 +185,16 @@ def file_m():
 
 
 def net():
-    run_command("pacman -S --noconfirm dialog wpa_supplicant dhcpcd netctl networkmanager network-manager-applet ppp")
+    run_command("pacman -S --noconfirm dialog wpa_supplicant dhcpcd netctl networkmanager network-manager-applet ppp iwd")
+
+    uncomment_lines = [
+        ("# See hosts(5) for details.",
+         f"127.0.0.1        localhost \n::1              localhost \n127.0.1.1        {host_user_name}")
+    ]
+    modify_lines_in_file("/etc/resolv.conf", uncomment_lines)
+    
     run_command("systemctl enable NetworkManager")
+    run_command("systemctl enable systemd-resolved")
 
 
 def fonts():
@@ -194,7 +202,7 @@ def fonts():
 
 
 def xorg():
-    run_command("pacman -S --noconfirm xorg-server xorg-server-common xorg-xinit")
+    run_command("pacman -S --noconfirm xorg-server xorg-server-common xorg-xinit xdg-desktop-portal")
 
 
 def wine():
@@ -312,7 +320,7 @@ def optimizm():
     run_command("pacman -S --noconfirm gamemode lib32-gamemode gamescope")
     run_command("systemctl --user enable gamemoded")
 
-def localh():
+def local_h():
     uncomment_lines = [
         ("# See hosts(5) for details.",
          f"127.0.0.1        localhost \n::1              localhost \n127.0.1.1        {host_user_name}")
@@ -357,4 +365,5 @@ other()
 yay()
 zsh()
 optimizm()
+local_h()
 lost()
