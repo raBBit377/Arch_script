@@ -1,7 +1,7 @@
 import subprocess
 from color import colors
 import sys
-from meaning import host_user_name, user_name, passwd_user, passwd_root
+from meaning import host_user_name, user_name, passwd_user, passwd_root, sda, nvm
 
 
 def hello():
@@ -106,8 +106,7 @@ def arch_system():
 def grub():
     run_command("pacman -Syy")
     run_command("pacman -S --noconfirm grub efibootmgr")
-    # run_command("grub-install /dev/sda")
-    run_command("grub-install /dev/nvme0n1")
+    run_command(f"grub-install {nvm}")
     run_command("pacman -S --noconfirm os-prober mtools fuse")
     run_command("grub-mkconfig -o /boot/grub/grub.cfg")
 
@@ -294,7 +293,7 @@ def optimizm():
     run_command(f"sudo -n -u {user_name} yay -S uksmd-git --noconfirm")
     run_command("systemctl enable uksmd")
     run_command("pacman -S --noconfirm cpupower")
-    run_command(f"sudo -n -u {user_name} yay -S portproton --noconfirm")
+    run_command(f"sudo -n -u {user_name} yay -S heroic-games-launcher-git --noconfirm")
     run_command(f"sudo -n -u {user_name} yay -S dxvk-mingw-git --noconfirm")
     run_command(f"sudo -n -u {user_name} yay -S vkd3d-proton-git --noconfirm")
     run_command(f"sudo -n -u {user_name} yay -S stacer-git --noconfirm")
@@ -302,9 +301,9 @@ def optimizm():
 
     uncomment_lines = [
         ("HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck)",
-         "HOOKS=(systemd autodetect modconf kms keymap keyboard  block btrfs usr)"
+         "HOOKS=(systemd autodetect modconf kms keymap keyboard block btrfs usr)"
          ),
-        ("MODULES=()", "MODULES=(btrfs nvme i915 nvidia)")
+        ("MODULES=()", "MODULES=(btrfs nvme i915 nvidia usbhid xhci_hcd nvidia_drm nvidia_uvm nvidia_modeset)")
     ]
     modify_lines_in_file("/etc/mkinitcpio.conf", uncomment_lines)
 
