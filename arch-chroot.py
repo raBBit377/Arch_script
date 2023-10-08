@@ -169,9 +169,8 @@ def install_pkg():
 
 
 def de_win():
-    # run_command("pacman -S --noconfirm xfce4 xfce4-goodies ly")
-    run_command("pacman -S --noconfirm awesome")
-    # run_command("systemctl enable ly")
+    run_command("pacman -S --noconfirm plasma-meta kde-applications-meta sddm-kcm sddm")
+    run_command("systemctl enable sddm")
 
 
 def audio():
@@ -201,7 +200,7 @@ def fonts():
 
 
 def xorg():
-    run_command("pacman -S --noconfirm xorg-server xorg-server-common xorg-xinit xdg-desktop-portal")
+    run_command("pacman -S --noconfirm xorg-server xorg-server-common xorg-xinit xorg-xprop xdg-desktop-portal")
 
 
 def wine():
