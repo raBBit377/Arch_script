@@ -238,7 +238,7 @@ def nvidia():
     run_command("mkinitcpio -P")
 
 def virtual():
-    run_command("pacman -S --noconfirm  virtualbox-host-dkms")
+    run_command("pacman -S --noconfirm vboxweb virtualbox-host-dkms")
     run_command(f"usermod -aG vboxusers {user_name}")
 
 
@@ -295,8 +295,10 @@ def optimizm():
     run_command(f"sudo -n -u {user_name} yay -S heroic-games-launcher-git --noconfirm")
     run_command(f"sudo -n -u {user_name} yay -S dxvk-mingw-git --noconfirm")
     run_command(f"sudo -n -u {user_name} yay -S vkd3d-proton-git --noconfirm")
-    run_command(f"sudo -n -u {user_name} yay -S stacer-git --noconfirm")
+    run_command(f"sudo -n -u {user_name} yay -S awesome-git --noconfirm")
     run_command(f"sudo -n -u {user_name} yay -S ventoy-bin --noconfirm")
+    run_command(f"sudo -n -u {user_name} yay -S virtualbox-ext-oracle --noconfirm")
+    run_command("systemctl enable vboxweb")
 
     uncomment_lines = [
         ("HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck)",
