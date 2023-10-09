@@ -325,7 +325,7 @@ def local_h():
         ("# See hosts(5) for details.",
          f"127.0.0.1        localhost \n::1              localhost \n127.0.1.1        {host_user_name}")
     ]
-    modify_lines_in_file("etc/pacman.conf", uncomment_lines)
+    modify_lines_in_file("etc/hosts", uncomment_lines)
 
 def lost():
     uncomment_lines = [
