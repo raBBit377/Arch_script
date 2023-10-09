@@ -238,7 +238,7 @@ def nvidia():
     run_command("mkinitcpio -P")
 
 def virtual():
-    run_command("pacman -S --noconfirm vboxweb virtualbox-host-dkms")
+    run_command("pacman -S --noconfirm virtualbox virtualbox-host-dkms")
     run_command(f"usermod -aG vboxusers {user_name}")
 
 
