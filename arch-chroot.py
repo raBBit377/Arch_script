@@ -169,8 +169,8 @@ def install_pkg():
 
 
 def de_win():
-    run_command("pacman -S --noconfirm plasma-meta kde-applications-meta sddm-kcm sddm")
-    run_command("systemctl enable sddm")
+    run_command("pacman -S --noconfirm awesome")
+    #run_command("systemctl enable sddm")
 
 
 def audio():
@@ -191,7 +191,7 @@ def net():
     ]
     modify_lines_in_file("/etc/resolv.conf", uncomment_lines)
     
-    run_command("systemctl enable NetworkManager")
+    #run_command("systemctl enable NetworkManager")
     run_command("systemctl enable systemd-resolved")
 
 
