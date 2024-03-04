@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Змінні
-disk="/dev/sdX"
+disk="/dev/sda"
 esp_size="5.4gb"
 swap_size="50G"
 btrfs_start="4.5GiB"
