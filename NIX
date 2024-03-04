@@ -3,7 +3,7 @@
 # Змінні
 disk="/dev/sdX"
 esp_size="5.4gb"
-swap_size="4G"
+swap_size="50G"
 btrfs_start="4.5GiB"
 
 # Створення ESP (EFI System Partition)
